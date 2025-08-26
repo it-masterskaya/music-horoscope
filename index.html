@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎵 Музыкальный гороскоп для детей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 25px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            border: 3px solid #ff6b6b;
+        }
+
+        h1 {
+            color: #ff6b6b;
+            font-size: 2.2em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            color: #333;
+            font-size: 1.1em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 3px solid #ffd93d;
+            border-radius: 15px;
+            font-size: 1.1em;
+            font-family: inherit;
+            background: #fff9e6;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #ff6b6b;
+            transform: scale(1.02);
+            transition: all 0.3s ease;
+        }
+
+        button {
+            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
+        }
+
+        button:active {
+            transform: translateY(-1px);
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 20px;
+            background: linear-gradient(45deg, #a8edea, #fed6e3);
+            border-radius: 20px;
+            border: 3px solid #ff6b6b;
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-header {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .song-info {
+            background: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+        }
+
+        .song-title {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-bottom: 8px;
+        }
+
+        .song-description {
+            color: #666;
+            font-size: 1em;
+            line-height: 1.4;
+        }
+
+        .stars {
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+
+        .emoji {
+            font-size: 2em;
+            margin: 10px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎵 Музыкальный гороскоп 🎵</h1>
+        <p style="color: #666; margin-bottom: 25px;">Узнай, какая песня подходит тебе по знаку зодиака!</p>
+        
+        <div class="input-group">
+            <label for="name">🌟 Твоё имя:</label>
+            <input type="text" id="name" placeholder="Введи своё имя">
+        </div>
+        
+        <div class="input-group">
+            <label for="zodiac">🌙 Твой знак зодиака:</label>
+            <select id="zodiac">
+                <option value="">Выбери свой знак</option>
+                <option value="aries">♈ Овен (21 марта - 19 апреля)</option>
+                <option value="taurus">♉ Телец (20 апреля - 20 мая)</option>
+                <option value="gemini">♊ Близнецы (21 мая - 20 июня)</option>
+                <option value="cancer">♋ Рак (21 июня - 22 июля)</option>
+                <option value="leo">♌ Лев (23 июля - 22 августа)</option>
+                <option value="virgo">♍ Дева (23 августа - 22 сентября)</option>
+                <option value="libra">♎ Весы (23 сентября - 22 октября)</option>
+                <option value="scorpio">♏ Скорпион (23 октября - 21 ноября)</option>
+                <option value="sagittarius">♐ Стрелец (22 ноября - 21 декабря)</option>
+                <option value="capricorn">♑ Козерог (22 декабря - 19 января)</option>
+                <option value="aquarius">♒ Водолей (20 января - 18 февраля)</option>
+                <option value="pisces">♓ Рыбы (19 февраля - 20 марта)</option>
+            </select>
+        </div>
+        
+        <button onclick="generateHoroscope()">✨ Узнать мою песню! ✨</button>
+        
+        <div id="result"></div>
+    </div>
+
+    <script>
+        const musicHoroscope = {
+            aries: {
+                song: "Я на солнышке лежу",
+                artist: "Из мультфильма 'Как львёнок и черепаха пели песню'",
+                description: "Овны энергичные и солнечные! Эта весёлая песня про солнышко идеально подходит твоему активному характеру.",
+                emoji: "🦁☀️",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            taurus: {
+                song: "В траве сидел кузнечик",
+                artist: "Детская классика",
+                description: "Тельцы любят природу и спокойствие. Песня про маленького зелёного кузнечика в траве - это твоя мелодия!",
+                emoji: "🦗🌿",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            gemini: {
+                song: "Улыбка",
+                artist: "Из мультфильма 'Крошка Енот'",
+                description: "Близнецы общительные и дружелюбные! 'От улыбки станет всем светлей' - это про тебя!",
+                emoji: "😊🌈",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            cancer: {
+                song: "Мама для мамонтёнка",
+                artist: "Из мультфильма 'Мама для мамонтёнка'",
+                description: "Раки очень семейные и добрые. Эта трогательная песня про поиск мамы отражает твоё любящее сердце.",
+                emoji: "🐘❤️",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            leo: {
+                song: "Песенка Львёнка и Черепахи",
+                artist: "Из мультфильма 'Как львёнок и черепаха пели песню'",
+                description: "Львы яркие и харизматичные! Эта королевская песня идеально подходит твоему величественному характеру.",
+                emoji: "👑🦁",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            virgo: {
+                song: "Антошка",
+                artist: "Детская классика",
+                description: "Девы практичные и трудолюбивые. 'Антошка, пойдём копать картошку' - песня про полезный труд!",
+                emoji: "🥔👨‍🌾",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            libra: {
+                song: "Дружба крепкая",
+                artist: "Из мультфильма 'Тимка и Димка'",
+                description: "Весы ценят гармонию и дружбу. Эта песня про крепкую дружбу отражает твоё стремление к балансу.",
+                emoji: "👫⚖️",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            scorpio: {
+                song: "Чунга-Чанга",
+                artist: "Из мультфильма 'Катерок'",
+                description: "Скорпионы загадочные и страстные. Эта экзотическая песня про далёкий остров подходит твоей таинственности!",
+                emoji: "🏝️🦂",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            sagittarius: {
+                song: "Голубой вагон",
+                artist: "Из мультфильма 'Старуха Шапокляк'",
+                description: "Стрельцы любят путешествия и приключения! 'Голубой вагон бежит качается' - это песня твоих путешествий!",
+                emoji: "🚂🏹",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            capricorn: {
+                song: "Песенка про папу",
+                artist: "Детская классика",
+                description: "Козероги ответственные и надёжные. Эта песня про папу отражает твой серьёзный и заботливый характер.",
+                emoji: "👨‍👧‍👦⛰️",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            aquarius: {
+                song: "Облака",
+                artist: "Из мультфильма 'Трям! Здравствуйте!'",
+                description: "Водолеи мечтательные и творческие. 'Облака - белогривые лошадки' - песня для настоящего мечтателя!",
+                emoji: "☁️🦄",
+                stars: "⭐⭐⭐⭐⭐"
+            },
+            pisces: {
+                song: "Колыбельная медведицы",
+                artist: "Из мультфильма 'Умка'",
+                description: "Рыбы чувствительные и добрые. Эта нежная колыбельная отражает твою мягкую и заботливую душу.",
+                emoji: "🐻‍❄️🌙",
+                stars: "⭐⭐⭐⭐⭐"
+            }
+        };
+
+        function generateHoroscope() {
+            const name = document.getElementById('name').value.trim();
+            const zodiac = document.getElementById('zodiac').value;
+            
+            if (!name || !zodiac) {
+                alert('Пожалуйста, введи своё имя и выбери знак зодиака! 😊');
+                return;
+            }
+            
+            const horoscope = musicHoroscope[zodiac];
+            const resultDiv = document.getElementById('result');
+            
+            resultDiv.innerHTML = `
+                <div class="result-header">
+                    🎵 ${name}, твоя музыкальная судьба! 🎵
+                </div>
+                
+                <div class="emoji">${horoscope.emoji}</div>
+                
+                <div class="song-info">
+                    <div class="song-title">🎼 "${horoscope.song}"</div>
+                    <div class="song-description">
+                        <strong>Исполнитель:</strong> ${horoscope.artist}<br><br>
+                        <strong>Почему эта песня тебе подходит:</strong><br>
+                        ${horoscope.description}
+                    </div>
+                </div>
+                
+                <div class="stars">${horoscope.stars}</div>
+                
+                <p style="color: #666; margin-top: 15px; font-size: 0.9em;">
+                    💡 <strong>Совет:</strong> Послушай эту песню и подпевай - она принесёт тебе удачу!
+                </p>
+            `;
+            
+            resultDiv.style.display = 'block';
+        }
+
+        // Добавляем возможность нажать Enter в поле имени
+        document.getElementById('name').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                generateHoroscope();
+            }
+        });
+    </script>
+</body>
+</html>
