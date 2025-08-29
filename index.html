@@ -1,256 +1,48 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>🎵 Музыкальный гороскоп на сегодня</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        .container {
-            background: white;
-            border-radius: 25px;
-            padding: 30px;
-            max-width: 500px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            border: 3px solid #ff6b6b;
-        }
-        h1 {
-            color: #ff6b6b;
-            font-size: 2.2em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            color: #333;
-            font-size: 1.1em;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border: 3px solid #ffd93d;
-            border-radius: 15px;
-            font-size: 1.1em;
-            font-family: inherit;
-            background: #fff9e6;
-        }
-        input:focus, select:focus {
-            outline: none;
-            border-color: #ff6b6b;
-            transform: scale(1.02);
-            transition: all 0.3s ease;
-        }
-        button {
-            background: linear-gradient(45deg, #ff6b6b, #ffd93d);
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: bold;
-            border-radius: 25px;
-            cursor: pointer;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
-            margin-bottom: 10px;
-        }
-        button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 20px rgba(0,0,0,0.3);
-        }
-        button:active {
-            transform: translateY(-1px);
-        }
-        .music-button {
-            background: linear-gradient(45deg, #4CAF50, #45a049);
-            padding: 10px 20px;
-            font-size: 1em;
-            margin: 10px 5px;
-        }
-        #result {
-            margin-top: 25px;
-            padding: 20px;
-            background: linear-gradient(45deg, #a8edea, #fed6e3);
-            border-radius: 20px;
-            border: 3px solid #ff6b6b;
-            display: none;
-            animation: slideIn 0.5s ease-out;
-        }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .result-header {
-            font-size: 1.4em;
-            color: #333;
-            margin-bottom: 15px;
-            font-weight: bold;
-        }
-        .song-info {
-            background: white;
-            padding: 15px;
-            border-radius: 15px;
-            margin: 15px 0;
-            box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        }
-        .song-title {
-            font-size: 1.3em;
-            font-weight: bold;
-            color: #ff6b6b;
-            margin-bottom: 8px;
-        }
-        .song-artist {
-            font-size: 1em;
-            color: #666;
-            margin-bottom: 12px;
-            font-style: italic;
-        }
-        .prediction {
-            color: #333;
-            font-size: 1.1em;
-            line-height: 1.5;
-            background: #f0f8ff;
-            padding: 15px;
-            border-radius: 10px;
-            margin: 15px 0;
-            border-left: 4px solid #ff6b6b;
-        }
-        .stars {
-            font-size: 1.5em;
-            margin: 10px 0;
-        }
-        .emoji {
-            font-size: 2em;
-            margin: 10px;
-        }
-        .current-date {
-            font-size: 0.9em;
-            color: #666;
-            margin-bottom: 10px;
-        }
-        @media (max-width: 600px) {
-            .container { padding: 20px; margin: 10px; }
-            h1 { font-size: 1.8em; }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h1>🎵 Музыкальный гороскоп на сегодня 🎵</h1>
-        <p style="color: #666; margin-bottom: 25px;">Узнай, что говорят звёзды о твоей музыке сегодня! Каждый день новое предсказание для твоей песни! ⭐</p>
-        
-        <div class="input-group">
-            <label for="name">🌟 Твоё имя:</label>
-            <input type="text" id="name" placeholder="Введи своё имя">
-        </div>
+<script>
+const dailySongs = [
+    { song: "По дороге с облаками", artist: "Из мультфильма 'По дороге с облаками'", prediction: "Звезды говорят: сегодня отправляйся в небольшое путешествие!", emoji: "☁️🛤️", musicLink: "https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9F%D0%BE%20%D0%B4%D0%BE%D1%80%D0%BE%D0%B3%D0%B5%20%D1%81%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%B0%D0%BC%D0%B8%22" },
+    { song: "Кручу педали, кручу", artist: "Кот Леопольд", prediction: "Активный день впереди! Займись спортом или просто больше двигайся!", emoji: "🚴‍♂️💨", musicLink: "https://vk.com/audio-2001246712_70246712" },
+    { song: "Ничего на свете лучше нету", artist: "Бременские музыканты", prediction: "День дружбы! Позвони старому другу или найди нового товарища.", emoji: "👫🎸", musicLink: "https://vk.com/audio?performer=1&q=%D0%91%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0%D0%BD%D1%82%D1%8B" }
+];
 
-        <div class="input-group">
-            <label for="zodiac">🌙 Твой знак зодиака:</label>
-            <select id="zodiac">
-                <option value="">Выбери свой знак</option>
-                <option value="aries">♈ Овен (21 марта - 19 апреля)</option>
-                <option value="taurus">♉ Телец (20 апреля - 20 мая)</option>
-                <option value="gemini">♊ Близнецы (21 мая - 20 июня)</option>
-                <option value="cancer">♋ Рак (21 июня - 22 июля)</option>
-                <option value="leo">♌ Лев (23 июля - 22 августа)</option>
-                <option value="virgo">♍ Дева (23 августа - 22 сентября)</option>
-                <option value="libra">♎ Весы (23 сентября - 22 октября)</option>
-                <option value="scorpio">♏ Скорпион (23 октября - 21 ноября)</option>
-                <option value="sagittarius">♐ Стрелец (22 ноября - 21 декабря)</option>
-                <option value="capricorn">♑ Козерог (22 декабря - 19 января)</option>
-                <option value="aquarius">♒ Водолей (20 января - 18 февраля)</option>
-                <option value="pisces">♓ Рыбы (19 февраля - 20 марта)</option>
-            </select>
-        </div>
+function generateHoroscope() {
+    const name = document.getElementById('name').value.trim();
+    const zodiac = document.getElementById('zodiac').value;
 
-        <button onclick="generateHoroscope()">✨ Узнать мой гороскоп на сегодня! ✨</button>
-
-        <div id="result"></div>
-    </div>
-
-    <script>
-    const dailySongs = [
-        { song: "По дороге с облаками", artist: "Из мультфильма 'По дороге с облаками'", prediction: "Звезды говорят: сегодня отправляйся в небольшое путешествие! Даже если это прогулка во дворе - ты найдешь что-то интересное!", emoji: "☁️🛤️", musicLink: "https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9F%D0%BE%20%D0%B4%D0%BE%D1%80%D0%BE%D0%B3%D0%B5%20%D1%81%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%B0%D0%BC%D0%B8%22" },
-        { song: "Кручу педали, кручу", artist: "Кот Леопольд", prediction: "Активный день впереди! Займись спортом или просто больше двигайся - энергия принесет успех!", emoji: "🚴‍♂️💨", musicLink: "https://vk.com/audio-2001246712_70246712" },
-        { song: "Ничего на свете лучше нету", artist: "Бременские музыканты", prediction: "День дружбы! Позвони старому другу или найди нового товарища. Вместе вы свернете горы!", emoji: "👫🎸", musicLink: "https://vk.com/audio?performer=1&q=%D0%91%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0%D0%BD%D1%82%D1%8B" },
-        // … остальные песни здесь, каждая с одной ссылкой musicLink
-    ];
-
-    function generateHoroscope() {
-        const name = document.getElementById('name').value.trim();
-        const zodiac = document.getElementById('zodiac').value;
-
-        if (!name || !zodiac) {
-            alert('Пожалуйста, введи своё имя и выбери знак зодиака! 😊');
-            return;
-        }
-
-        const today = new Date();
-        const startOfYear = new Date(today.getFullYear(), 0, 0);
-        const dayOfYear = Math.floor((today - startOfYear) / (1000 * 60 * 60 * 24));
-
-        // Хэш знака зодиака для уникальности
-        const zodiacHash = Array.from(zodiac).reduce((acc, char) => acc + char.charCodeAt(0), 0);
-        const songIndex = (dayOfYear + zodiacHash) % dailySongs.length;
-        const todaySong = dailySongs[songIndex];
-
-        const resultDiv = document.getElementById('result');
-        const currentDate = today.toLocaleDateString('ru-RU', { 
-            weekday: 'long',
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-        });
-
-        resultDiv.innerHTML = `
-            <div class="current-date">${currentDate}</div>
-            <div class="result-header">🎵 ${name}, твой музыкальный гороскоп на сегодня! 🎵</div>
-            <div class="emoji">${todaySong.emoji}</div>
-            <div class="song-info">
-                <div class="song-title">🎼 "${todaySong.song}"</div>
-                <div class="song-artist">${todaySong.artist}</div>
-                <button class="music-button" onclick="window.open('${todaySong.musicLink}', '_blank')">
-                    🎵 Послушать в ВК Музыке
-                </button>
-            </div>
-            <div class="prediction">
-                <strong>🔮 Предсказание на сегодня:</strong><br><br>
-                ${todaySong.prediction}
-            </div>
-            <div class="stars">⭐⭐⭐⭐⭐</div>
-            <p style="color: #666; margin-top: 15px; font-size: 0.9em;">
-                💡 <strong>Совет:</strong> Послушай эту песню и следуй предсказанию - день станет особенным!<br>
-                🔄 <strong>Завтра</strong> тебя ждет новая песня и новое предсказание!
-            </p>
-        `;
-        resultDiv.style.display = 'block';
+    if (!name || !zodiac) {
+        alert('Пожалуйста, введи своё имя и выбери знак зодиака! 😊');
+        return;
     }
 
-    document.getElementById('name').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            generateHoroscope();
-        }
-    });
-    </script>
-</body>
-</html>
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 0);
+    const dayOfYear = Math.floor((today - startOfYear) / (1000*60*60*24));
+
+    // Хэш знака зодиака для уникальности
+    const zodiacHash = Array.from(zodiac).reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const songIndex = (dayOfYear + zodiacHash) % dailySongs.length;
+    const todaySong = dailySongs[songIndex];
+
+    const resultDiv = document.getElementById('result');
+    const currentDate = today.toLocaleDateString('ru-RU', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+
+    resultDiv.innerHTML = `
+        <div class="current-date">${currentDate}</div>
+        <div class="result-header">🎵 ${name}, твой музыкальный гороскоп на сегодня! 🎵</div>
+        <div class="emoji">${todaySong.emoji}</div>
+        <div class="song-info">
+            <div class="song-title">🎼 "${todaySong.song}"</div>
+            <div class="song-artist">${todaySong.artist}</div>
+            <button class="music-button" onclick="window.open('${todaySong.musicLink}', '_blank')">
+                🎵 Послушать в ВК Музыке
+            </button>
+        </div>
+        <div class="prediction"><strong>🔮 Предсказание на сегодня:</strong><br><br>${todaySong.prediction}</div>
+    `;
+    resultDiv.style.display = 'block';
+}
+
+document.getElementById('name').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') generateHoroscope();
+});
+</script>
