@@ -5,102 +5,132 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>🎵 Музыкальный гороскоп на сегодня</title>
 <style>
-    * { margin:0; padding:0; box-sizing:border-box; }
-    body { font-family:'Comic Sans MS', cursive, sans-serif; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height:100vh; display:flex; align-items:center; justify-content:center; padding:20px; }
-    .container { background:white; border-radius:25px; padding:30px; max-width:500px; width:100%; text-align:center; box-shadow:0 20px 40px rgba(0,0,0,0.1); border:3px solid #ff6b6b; }
-    h1 { color:#ff6b6b; font-size:2.2em; margin-bottom:20px; text-shadow:2px 2px 4px rgba(0,0,0,0.1); }
-    .input-group { margin-bottom:20px; }
-    label { display:block; color:#333; font-size:1.1em; font-weight:bold; margin-bottom:8px; }
-    input, select { width:100%; padding:12px; border:3px solid #ffd93d; border-radius:15px; font-size:1.1em; font-family:inherit; background:#fff9e6; }
-    input:focus, select:focus { outline:none; border-color:#ff6b6b; transform:scale(1.02); transition:all 0.3s ease; }
-    button { background: linear-gradient(45deg, #ff6b6b, #ffd93d); color:white; border:none; padding:15px 30px; font-size:1.2em; font-weight:bold; border-radius:25px; cursor:pointer; text-shadow:1px 1px 2px rgba(0,0,0,0.3); box-shadow:0 8px 15px rgba(0,0,0,0.2); transition:all 0.3s ease; margin-bottom:10px; }
-    button:hover { transform:translateY(-3px); box-shadow:0 12px 20px rgba(0,0,0,0.3); }
-    .music-button { background: linear-gradient(45deg, #4CAF50, #45a049); padding:10px 20px; font-size:1em; margin:10px 5px; }
-    #result { margin-top:25px; padding:20px; background: linear-gradient(45deg, #a8edea, #fed6e3); border-radius:20px; border:3px solid #ff6b6b; display:none; animation:slideIn 0.5s ease-out; }
-    @keyframes slideIn { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:translateY(0); } }
-    .result-header { font-size:1.4em; color:#333; margin-bottom:15px; font-weight:bold; }
-    .song-info { background:white; padding:15px; border-radius:15px; margin:15px 0; box-shadow:0 5px 10px rgba(0,0,0,0.1); }
-    .song-title { font-size:1.3em; font-weight:bold; color:#ff6b6b; margin-bottom:8px; }
-    .song-artist { font-size:1em; color:#666; margin-bottom:12px; font-style:italic; }
-    .prediction { color:#333; font-size:1.1em; line-height:1.5; background:#f0f8ff; padding:15px; border-radius:10px; margin:15px 0; border-left:4px solid #ff6b6b; }
-    .stars { font-size:1.5em; margin:10px 0; }
-    .emoji { font-size:2em; margin:10px; }
-    .current-date { font-size:0.9em; color:#666; margin-bottom:10px; }
-    @media (max-width:600px) { .container { padding:20px; margin:10px; } h1 { font-size:1.8em; } }
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Comic Sans MS',cursive,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;}
+.container{background:white;border-radius:25px;padding:30px;max-width:500px;width:100%;text-align:center;box-shadow:0 20px 40px rgba(0,0,0,0.1);border:3px solid #ff6b6b;}
+h1{color:#ff6b6b;font-size:2.2em;margin-bottom:20px;text-shadow:2px 2px 4px rgba(0,0,0,0.1);}
+.input-group{margin-bottom:20px;}
+label{display:block;color:#333;font-size:1.1em;font-weight:bold;margin-bottom:8px;}
+input,select{width:100%;padding:12px;border:3px solid #ffd93d;border-radius:15px;font-size:1.1em;font-family:inherit;background:#fff9e6;}
+input:focus,select:focus{outline:none;border-color:#ff6b6b;transform:scale(1.02);transition:all 0.3s ease;}
+button{background:linear-gradient(45deg,#ff6b6b,#ffd93d);color:white;border:none;padding:15px 30px;font-size:1.2em;font-weight:bold;border-radius:25px;cursor:pointer;text-shadow:1px 1px 2px rgba(0,0,0,0.3);box-shadow:0 8px 15px rgba(0,0,0,0.2);transition:all 0.3s ease;margin-bottom:10px;}
+button:hover{transform:translateY(-3px);box-shadow:0 12px 20px rgba(0,0,0,0.3);}
+button:active{transform:translateY(-1px);}
+.music-button{background:linear-gradient(45deg,#4CAF50,#45a049);padding:10px 20px;font-size:1em;margin:10px 5px;display:inline-block;text-decoration:none;color:white;border-radius:15px;}
+#result{margin-top:25px;padding:20px;background:linear-gradient(45deg,#a8edea,#fed6e3);border-radius:20px;border:3px solid #ff6b6b;display:none;animation:slideIn 0.5s ease-out;}
+@keyframes slideIn{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+.result-header{font-size:1.4em;color:#333;margin-bottom:15px;font-weight:bold;}
+.song-info{background:white;padding:15px;border-radius:15px;margin:15px 0;box-shadow:0 5px 10px rgba(0,0,0,0.1);}
+.song-title{font-size:1.3em;font-weight:bold;color:#ff6b6b;margin-bottom:8px;}
+.song-artist{font-size:1em;color:#666;margin-bottom:12px;font-style:italic;}
+.prediction{color:#333;font-size:1.1em;line-height:1.5;background:#f0f8ff;padding:15px;border-radius:10px;margin:15px 0;border-left:4px solid #ff6b6b;}
+.emoji{font-size:2em;margin:10px;}
+.current-date{font-size:0.9em;color:#666;margin-bottom:10px;}
+@media(max-width:600px){.container{padding:20px;margin:10px;} h1{font-size:1.8em;}}
 </style>
 </head>
 <body>
 <div class="container">
-    <h1>🎵 Музыкальный гороскоп на сегодня 🎵</h1>
-    <p style="color:#666; margin-bottom:25px;">Узнай, что говорят звёзды о твоей музыке сегодня! Каждый день новое предсказание для твоей песни! ⭐</p>
+<h1>🎵 Музыкальный гороскоп на сегодня 🎵</h1>
+<p style="color:#666;margin-bottom:25px;">Узнай, что говорят звёзды о твоей музыке сегодня! ⭐</p>
 
-    <div class="input-group">
-        <label for="name">🌟 Твоё имя:</label>
-        <input type="text" id="name" placeholder="Введи своё имя">
-    </div>
+<div class="input-group">
+<label for="name">🌟 Твоё имя:</label>
+<input type="text" id="name" placeholder="Введи своё имя">
+</div>
 
-    <div class="input-group">
-        <label for="zodiac">🌙 Твой знак зодиака:</label>
-        <select id="zodiac">
-            <option value="">Выбери свой знак</option>
-            <option value="aries">♈ Овен</option>
-            <option value="taurus">♉ Телец</option>
-            <option value="gemini">♊ Близнецы</option>
-            <option value="cancer">♋ Рак</option>
-            <option value="leo">♌ Лев</option>
-            <option value="virgo">♍ Дева</option>
-            <option value="libra">♎ Весы</option>
-            <option value="scorpio">♏ Скорпион</option>
-            <option value="sagittarius">♐ Стрелец</option>
-            <option value="capricorn">♑ Козерог</option>
-            <option value="aquarius">♒ Водолей</option>
-            <option value="pisces">♓ Рыбы</option>
-        </select>
-    </div>
+<div class="input-group">
+<label for="zodiac">🌙 Твой знак зодиака:</label>
+<select id="zodiac">
+<option value="">Выбери свой знак</option>
+<option value="aries">♈ Овен</option>
+<option value="taurus">♉ Телец</option>
+<option value="gemini">♊ Близнецы</option>
+<option value="cancer">♋ Рак</option>
+<option value="leo">♌ Лев</option>
+<option value="virgo">♍ Дева</option>
+<option value="libra">♎ Весы</option>
+<option value="scorpio">♏ Скорпион</option>
+<option value="sagittarius">♐ Стрелец</option>
+<option value="capricorn">♑ Козерог</option>
+<option value="aquarius">♒ Водолей</option>
+<option value="pisces">♓ Рыбы</option>
+</select>
+</div>
 
-    <button onclick="generateHoroscope()">✨ Узнать мой гороскоп на сегодня! ✨</button>
-
-    <div id="result"></div>
+<button onclick="generateHoroscope()">✨ Узнать мой гороскоп на сегодня! ✨</button>
+<div id="result"></div>
 </div>
 
 <script>
+// Все 28 песен с предсказаниями и ссылками
 const dailySongs = [
-    { song:"По дороге с облаками", artist:"Из мультфильма 'По дороге с облаками'", prediction:"Звезды советуют прогуляться и найти что-то интересное.", emoji:"☁️🛤️", musicLink:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9F%D0%BE%20%D0%B4%D0%BE%D1%80%D0%BE%D0%B3%D0%B5%20%D1%81%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%B0%D0%BC%D0%B8%22" },
-    { song:"Кручу педали, кручу", artist:"Кот Леопольд", prediction:"Сегодня активный день! Двигайся больше и наслаждайся энергией.", emoji:"🚴‍♂️💨", musicLink:"https://vk.com/audio-2001246712_70246712" },
-    { song:"Ничего на свете лучше нету", artist:"Бременские музыканты", prediction:"Позвони другу или найди нового товарища, день дружбы!", emoji:"👫🎸", musicLink:"https://vk.com/audio?performer=1&q=%D0%91%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0%D0%BD%D1%82%D1%8B" },
-    { song:"Неприятность эту мы переживем", artist:"Кот Леопольд", prediction:"Не расстраивайся, всё наладится!", emoji:"😸💪", musicLink:"https://vk.com/audio?performer=1&q=%D0%9A%D0%BE%D1%82%20%D0%9B%D0%B5%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D0%B4" },
-    { song:"До чего дошел прогресс", artist:"Из к/ф 'Приключения Электроника'", prediction:"Найди единомышленников и познакомься с интересным блогом.", emoji:"🤖⚡", musicLink:"https://vk.com/audio-2001524949_107524949" },
-    { song:"Если добрый ты", artist:"Из мультфильма 'Кот Леопольд'", prediction:"День добрых дел! Помоги кому-то сегодня.", emoji:"❤️✨", musicLink:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9A%D0%BE%D1%82%20%D0%9B%D0%B5%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D0%B4%22" },
-    { song:"Улыбка", artist:"От улыбки у неба радуга проснется", prediction:"Время изучать языки и открывать мир!", emoji:"😊🌈", musicLink:"https://vk.com/audio-2001040298_60040298" },
-    { song:"Пусть бегут неуклюже", artist:"Песенка крокодила Гены", prediction:"Делай всё с радостью, наслаждайся моментом.", emoji:"🐊🎵", musicLink:"https://vk.com/audio-2001081473_107081473" },
-    { song:"В каждом маленьком ребенке", artist:"Из м/ф 'Обезьянки, вперед'", prediction:"Используй детскую энергию для игр и открытий.", emoji:"🐵🎪", musicLink:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9E%D0%B1%D0%B5%D0%B7%D1%8C%D1%8F%D0%BD%D0%BA%D0%B8%2C%20%D0%B2%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%22" },
-    { song:"Частушки Бабок-Ёжек", artist:"Летучий корабль", prediction:"День озорства! Расскажи смешную историю или разыграй друзей.", emoji:"🧙‍♀️🎭", musicLink:"https://vk.com/audio-2001567306_99567306" },
-    { song:"Какой чудесный день", artist:"Песенка мышонка", prediction:"День открытий! Узнай что-то новое для себя.", emoji:"🐭☀️", musicLink:"https://vk.com/audio-2001072313_107072313" },
-    { song:"Приходите в гости к нам", artist:"В гостях у сказки", prediction:"День гостеприимства! Пригласи друзей или сходи в гости.", emoji:"🏠📚", musicLink:"https://vk.com/audio-2001801664_45801664" },
-    { song:"Я на солнышке лежу", artist:"Львенок и Черепаха", prediction:"Найди солнечное место и расслабься.", emoji:"🦁🌞", musicLink:"https://vk.com/audio-2001332193_66332193" },
-    { song:"Песенка о кузнечике", artist:"Андрей Орехов, Большой детский хор", prediction:"Будь осторожнее, как маленький кузнечик, но не бойся прыгать к новым приключениям.", emoji:"🦗🌿", musicLink:"https://vk.com/audio-2001043700_60043700" },
-    { song:"Пойдем копать картошку", artist:"Антошка", prediction:"Тропические ритмы зовут к новым знаниям.", emoji:"🥔👨‍🌾", musicLink:"https://vk.com/audio-2001517051_97517051" },
-    { song:"Чунга-Чанга", artist:"Родом из детства", prediction:"Тропическое настроение! Танцуй, пой и создавай праздник.", emoji:"🏝️🎵", musicLink:"https://vk.com/audio-2001141886_117141886" },
-    { song:"Голубой вагон", artist:"Крокодил Гена", prediction:"Не трать время на грусть - каждая минута ценна!", emoji:"🚂💫", musicLink:"https://vk.com/audio?performer=1&q=%D0%9A%D1%80%D0%BE%D0%BA%D0%BE%D0%B4%D0%B8%D0%BB%20%D0%93%D0%B5%D0%BD%D0%B0" },
-    { song:"Колыбельная медведицы", artist:"Умка", prediction:"День нежности! Обними родителей и поделись любовью.", emoji:"🐻‍❄️🌙", musicLink:"https://vk.com/audio?performer=1&q=%D0%A3%D0%BC%D0%BA%D0%B0" },
-    { song:"Белогривые лошадки", artist:"Облака", prediction:"Посмотри на облака и загадай желание - оно может сбыться.", emoji:"☁️🦄", musicLink:"https://vk.com/audio-2001040280_60040280" },
-    { song:"Теперь я Чебурашка", artist:"Чебурашка", prediction:"Найди новое хобби - творчество согреет душу.", emoji:"🐹❤️", musicLink:"https://vk.com/audio-2001040292_60040292" },
-    { song:"Кабы не было зимы", artist:"Простоквашино", prediction:"Каждый сезон прекрасен! Найди хорошее в сегодняшнем дне.", emoji:"❄️🌞", musicLink:"https://vk.com/audio?performer=1&q=%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%BA%D0%B2%D0%B0%D1%88%D0%B8%D0%BD%D0%BE" },
-    { song:"Расскажи, Снегурочка", artist:"Ну погоди", prediction:"Создай зимнее чудо сам - укрась комнату или приготовь что-то вкусное.", emoji:"❄️✨", musicLink:"https://vk.com/audio-2001040301_60040301" },
-    { song:"А-а, и зеленый попугай", artist:"Красная Шапочка", prediction:"Обязательно зайди на англоязычный блог, там интересные уроки!", emoji:"🦜👑", musicLink:"https://vk.com/audio?performer=1&q=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D0%A8%D0%B0%D0%BF%D0%BE%D1%87%D0%BA%D0%B0" },
-    { song:"Песенка о лете", artist:"Дед Мороз и лето", prediction:"Неси солнечное тепло везде, где бываешь!", emoji:"☀️🎵", musicLink:"https://vk.com/audio-2001514817_97514817" },
-    { song:"Леди Совершенство", artist:"Из к/ф 'Мэри Поппинс, до свидания!'", prediction:"Следи за осанкой, говори вежливо и помни о доброте.", emoji:"☂️👑", musicLink:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BA%2F%D1%84%20%22%D0%9C%D1%8D%D1%80%D0%B8%20%D0%9F%D0%BE%D0%BF%D0%BF%D0%B8%D0%BD%D1%81%2C%20%D0%B4%D0%BE%20%D1%81%D0%B2%D0%B8%D0%B4%D0%B0%D0%BD%D0%B8%D1%8F%21%22" },
-    { song:"Говорят, мы бяки-буки", artist:"Бременские музыканты", prediction:"Не обращай внимания на плохие слова, ты добрый человек!", emoji:"🎭🎸", musicLink:"https://vk.com/audio-2001900020_124900020" },
-    { song:"Луч солнца золотого", artist:"Муслим Магомаев", prediction:"Дари свет и тепло всем вокруг, это твоя миссия сегодня!", emoji:"🌅✨", musicLink:"https://vk.com/audio-2001064199_50064199" }
+{song:"По дороге с облаками", artist:"Из мультфильма 'По дороге с облаками'", prediction:"Сегодня отправляйся в небольшое путешествие!", emoji:"☁️🛤️", link:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9F%D0%BE%20%D0%B4%D0%BE%D1%80%D0%BE%D0%B3%D0%B5%20%D1%81%20%D0%BE%D0%B1%D0%BB%D0%B0%D0%BA%D0%B0%D0%BC%D0%B8%22"},
+{song:"Кручу педали, кручу", artist:"Кот Леопольд", prediction:"Активный день впереди!", emoji:"🚴‍♂️💨", link:"https://vk.com/audio-2001246712_70246712"},
+{song:"Ничего на свете лучше нету", artist:"Бременские музыканты", prediction:"Позвони старому другу!", emoji:"👫🎸", link:"https://vk.com/audio?performer=1&q=%D0%91%D1%80%D0%B5%D0%BC%D0%B5%D0%BD%D1%81%D0%BA%D0%B8%D0%B5%20%D0%BC%D1%83%D0%B7%D1%8B%D0%BA%D0%B0%D0%BD%D1%82%D1%8B"},
+{song:"Неприятность эту мы переживем", artist:"Кот Леопольд", prediction:"Если что-то пойдет не так - не расстраивайся!", emoji:"😸💪", link:"https://vk.com/audio?performer=1&q=%D0%9A%D0%BE%D1%82%20%D0%9B%D0%B5%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D0%B4"},
+{song:"До чего дошел прогресс", artist:"Из к/ф 'Приключения Электроника'", prediction:"Найди единомышленников!", emoji:"🤖⚡", link:"https://vk.com/audio-2001524949_107524949"},
+{song:"Если добрый ты", artist:"Кот Леопольд", prediction:"День добрых дел!", emoji:"❤️✨", link:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9A%D0%BE%D1%82%20%D0%9B%D0%B5%D0%BE%D0%BF%D0%BE%D0%BB%D1%8C%D0%B4%22"},
+{song:"Улыбка", artist:"От улыбки у неба радуга проснется", prediction:"Время изучать языки!", emoji:"😊🌈", link:"https://vk.com/audio-2001040298_60040298"},
+{song:"Пусть бегут неуклюже", artist:"Песенка крокодила Гены", prediction:"Сегодня наслаждайся каждым моментом!", emoji:"🐊🎵", link:"https://vk.com/audio-2001081473_107081473"},
+{song:"В каждом маленьком ребенке", artist:"Из м/ф 'Обезьянки, вперед'", prediction:"Используй свою энергию для веселых игр!", emoji:"🐵🎪", link:"https://vk.com/audio?performer=1&q=%D0%98%D0%B7%20%D0%BC%2F%D1%84%20%22%D0%9E%D0%B1%D0%B5%D0%B7%D1%8C%D1%8F%D0%BD%D0%BA%D0%B8%2C%20%D0%B2%D0%BF%D0%B5%D1%80%D0%B5%D0%B4%22"},
+{song:"Частушки Бабок-Ёжек", artist:"Летучий корабль", prediction:"День озорства и веселья!", emoji:"🧙‍♀️🎭", link:"https://vk.com/audio-2001567306_99567306"},
+{song:"Какой чудесный день", artist:"Песенка мышонка", prediction:"День открытий!", emoji:"🐭☀️", link:"https://vk.com/audio-2001072313_107072313"},
+{song:"Приходите в гости к нам", artist:"В гостях у сказки", prediction:"День гостеприимства!", emoji:"🏠📚", link:"https://vk.com/audio-2001801664_45801664"},
+{song:"Я на солнышке лежу", artist:"Львенок и Черепаха", prediction:"Найди солнечное место и расслабься.", emoji:"🦁🌞", link:"https://vk.com/audio-2001332193_66332193"},
+{song:"Песенка о кузнечике", artist:"Андрей Орехов", prediction:"Будь осторожнее, но не бойся прыгать к новым приключениям!", emoji:"🦗🌿", link:"https://vk.com/audio-2001043700_60043700"},
+{song:"Пойдем копать картошку", artist:"Антошка", prediction:"Зайди на одно видео по английскому!", emoji:"🥔👨‍🌾", link:"https://vk.com/audio-2001517051_97517051"},
+{song:"Чунга-Чанга", artist:"Родом из детства", prediction:"Танцуй, пой и создавай праздник!", emoji:"🏝️🎵", link:"https://vk.com/audio-2001141886_117141886"},
+{song:"Голубой вагон", artist:"Крокодил Гена", prediction:"Не трать время на грусть!", emoji:"🚂💫", link:"https://vk.com/audio?performer=1&q=%D0%9A%D1%80%D0%BE%D0%BA%D0%BE%D0%B4%D0%B8%D0%BB%20%D0%93%D0%B5%D0%BD%D0%B0"},
+{song:"Колыбельная медведицы", artist:"Умка", prediction:"Обними родителей, любовь делает всех сильнее!", emoji:"🐻‍❄️🌙", link:"https://vk.com/audio?performer=1&q=%D0%A3%D0%BC%D0%BA%D0%B0"},
+{song:"Белогривые лошадки", artist:"Облака", prediction:"Посмотри на облака и загадай желание!", emoji:"☁️🦄", link:"https://vk.com/audio-2001040280_60040280"},
+{song:"Теперь я Чебурашка", artist:"Чебурашка", prediction:"Найди новое хобби!", emoji:"🐹❤️", link:"https://vk.com/audio-2001040292_60040292"},
+{song:"Кабы не было зимы", artist:"Простоквашино", prediction:"Каждый сезон прекрасен!", emoji:"❄️🌞", link:"https://vk.com/audio?performer=1&q=%D0%9F%D1%80%D0%BE%D1%81%D1%82%D0%BE%D0%BA%D0%B2%D0%B0%D1%88%D0%B8%D0%BD%D0%BE"},
+{song:"Расскажи, Снегурочка", artist:"Ну погоди", prediction:"Создай волшебство сам!", emoji:"❄️✨", link:"https://vk.com/audio-2001040301_60040301"},
+{song:"А-а, и зеленый попугай", artist:"Красная Шапочка", prediction:"Обязательно зайди на уроки английского!", emoji:"🦜👑", link:"https://vk.com/audio?performer=1&q=%D0%9A%D1%80%D0%B0%D1%81%D0%BD%D0%B0%D1%8F%20%D0%A8%D0%B0%D0%BF%D0%BE%D1%87%D0%BA%D0%B0"},
+{song:"Песенка о лете", artist:"Дед Мороз и лето", prediction:"Неси солнечное тепло!", emoji:"☀️🎵", link:"https://vk.com/audio-2001514817_97514817"},
+{song:"Леди Совершенство", artist:"Мэри Поппинс", prediction:"Следи за осанкой и будь доброй!", emoji:"☂️👑", link:"https://vk.com/audio?performer=1&q=%D0%9C%D1%8D%D1%80%D0%B8%20%D0%9F%D0%BE%D0%BF%D0%BF%D0%B8%D0%BD%D1%81"},
+{song:"Говорят, мы бяки-буки", artist:"Бременские музыканты", prediction:"Не обращай внимания на плохое!", emoji:"🎭🎸", link:"https://vk.com/audio-2001900020_124900020"},
+{song:"Луч солнца золотого", artist:"Муслим Магомаев", prediction:"Дари свет и тепло всем вокруг!", emoji:"🌅✨", link:"https://vk.com/audio-2001064199_50064199"}
 ];
 
-function generateHoroscope() {
+function generateHoroscope(){
     const name = document.getElementById('name').value.trim();
     const zodiac = document.getElementById('zodiac').value;
-    if (!name || !zodiac) { alert('Пожалуйста, введи имя и выбери знак! 😊'); return; }
+    if(!name || !zodiac){alert('Пожалуйста, введи своё имя и выбери знак зодиака! 😊');return;}
 
     const today = new Date();
     const startOfYear = new Date(today.getFullYear(),0,0);
     const dayOfYear = Math.floor((today - startOfYear)/(1000*60*60*24));
 
-    const zodiacHash = Array.from(zodiac).reduce((acc,char
+    // Индекс песни зависит от дня года и знака зодиака (0-11)
+    const zodiacIndex = ["aries","taurus","gemini","cancer","leo","virgo","libra","scorpio","sagittarius","capricorn","aquarius","pisces"].indexOf(zodiac);
+    const songIndex = (dayOfYear + zodiacIndex) % dailySongs.length;
+    const song = dailySongs[songIndex];
+
+    const resultDiv = document.getElementById('result');
+    const currentDate = today.toLocaleDateString('ru-RU',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+
+    resultDiv.innerHTML=`
+    <div class="current-date">${currentDate}</div>
+    <div class="result-header">🎵 ${name}, твой музыкальный гороскоп на сегодня! 🎵</div>
+    <div class="emoji">${song.emoji}</div>
+    <div class="song-info">
+        <div class="song-title">🎼 "${song.song}"</div>
+        <div class="song-artist">${song.artist}</div>
+        <a class="music-button" href="${song.link}" target="_blank">🎵 Послушать в ВК Музыке</a>
+    </div>
+    <div class="prediction"><strong>🔮 Предсказание на сегодня:</strong><br><br>${song.prediction}</div>
+    <div class="stars">⭐⭐⭐⭐⭐</div>
+    <p style="color:#666;margin-top:15px;font-size:0.9em;">
+    💡 <strong>Совет:</strong> Послушай эту песню и следуй предсказанию - день станет особенным!<br>
+    🔄 <strong>Завтра</strong> тебя ждет новая песня и новое предсказание!
+    </p>`;
+
+    resultDiv.style.display='block';
+}
+
+document.getElementById('name').addEventListener('keypress',function(e){if(e.key==='Enter'){generateHoroscope();}});
+</script>
+</body>
+</html>
